@@ -437,7 +437,7 @@ cat >> /etc/ansible/hosts <<EOF
 EOF
 
 echo $(date) " - Cloning openshift-ansible repo for use in installation"
-runuser -l $SUDOUSER -c "git clone https://github.com/openshift/openshift-ansible /home/$SUDOUSER/openshift-ansible"
+runuser -l $SUDOUSER -c "git clone https://github.com/Aslamlatheef/openshift-ansible /home/$SUDOUSER/openshift-ansible"
 
 echo $(date) " - Running network_manager.yml playbook" 
 DOMAIN=`domainname -d` 
@@ -496,13 +496,5 @@ runuser -l $SUDOUSER -c "ansible-playbook ~/dockerregistry.yml"
 echo $(date) "- Sleep for 120"
 
 sleep 120
-
-# Execute setup-azure-master and setup-azure-node playbooks to configure Azure Cloud Provider
-echo $(date) "- Configuring OpenShift Cloud Provider to be Azure"
-
-runuser -l $SUDOUSER -c "ansible-playbook ~/setup-azure-master.yml"
-runuser -l $SUDOUSER -c "ansible-playbook ~/setup-azure-node-master.yml"
-runuser -l $SUDOUSER -c "ansible-playbook ~/setup-azure-node.yml"
-runuser -l $SUDOUSER -c "ansible-playbook ~/deletestucknodes.yml"
 
 echo $(date) " - Script complete"
