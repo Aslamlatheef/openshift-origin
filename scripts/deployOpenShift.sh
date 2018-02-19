@@ -497,4 +497,12 @@ echo $(date) "- Sleep for 120"
 
 sleep 120
 
+# Execute setup-azure-master and setup-azure-node playbooks to configure Azure Cloud Provider
+echo $(date) "- Configuring OpenShift Cloud Provider to be Azure"
+
+runuser -l $SUDOUSER -c "ansible-playbook ~/setup-azure-master.yml"
+runuser -l $SUDOUSER -c "ansible-playbook ~/setup-azure-node-master.yml"
+runuser -l $SUDOUSER -c "ansible-playbook ~/setup-azure-node.yml"
+runuser -l $SUDOUSER -c "ansible-playbook ~/deletestucknodes.yml"
+
 echo $(date) " - Script complete"
